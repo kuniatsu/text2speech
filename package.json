@@ -1,5 +1,6 @@
 {
   "name": "text2speech",
+  "description": "text2speech",
   "version": "0.0.0",
   "author": "Nguyen Quang Hai <skyarmor11@gmail.com>",
   "build": {
