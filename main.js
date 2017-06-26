@@ -2,11 +2,11 @@ const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const url = require('url');
 
-// process.envをセット
-require('dotenv').config();
+const build = true;
 
-// electronの自動再ロード
-require('electron-reload')(__dirname);
+if (!build) {
+  require('electron-reload')(__dirname);
+}
 
 // electronのウィンドウズ
 let win = null;
@@ -18,15 +18,16 @@ app.on('ready', () => {
   win = new BrowserWindow({ width: 500, height: 200 });
   win.setMenu(null);
   // ビルドモード：「npm run build」でビルドされたアプリをロード
-  if (process.env.PACKAGE === 'true') {
+  if (build) {
+    const pathToEntry = process.platform === 'darwin' ? './Contents/angular-dist/index.html' : './angular-dist/index.html';
     win.loadURL(url.format({
-      pathname: path.join(__dirname, 'dist/index.html'),
+      pathname: path.join(__dirname, pathToEntry),
       protocol: 'file:',
       slashes: true
     }));
   } else {
     // 開発モード：localhostにあるアプリでをロード
-    win.loadURL(process.env.HOST);
+    win.loadURL('http://localhost:4200');
   }
 
   // electronのウィンドを閉じる
