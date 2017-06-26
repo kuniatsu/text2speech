@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import textToSpeech from '../lib/bing';
 
 @Component({
   selector: 'app-root',
@@ -19,5 +20,10 @@ export class AppComponent {
     // サブミットボタンのハンドル
     onSubmit(f: NgForm) {
       console.log(f.value);
+      const input = [];
+      for (let i = 1; i <= 4; i++) {
+        input.push({ text: f.value['text' + i], voice: f.value['voice' + i] });
+      }
+      textToSpeech(input);
     }
 }
