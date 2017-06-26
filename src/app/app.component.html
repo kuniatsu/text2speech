@@ -1,0 +1,23 @@
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+  <input type="text" name="text1" ngModel="Prowler">
+  <select name="voice1" ngModel="en-US, BenjaminRUS">
+    <option *ngFor="let voice of voices" [value]="voice.value">{{voice.name}}</option>
+  </select>
+  <br/>
+  <input type="text" name="text2" ngModel="1">
+  <select name="voice2" ngModel="">
+    <option *ngFor="let voice of voices" [value]="voice.value">{{voice.name}}</option>
+  </select>
+  <br/>
+  <input type="text" name="text3" ngModel="プラウラー">
+  <select name="voice3" ngModel="ja-JP, Ichiro, Apollo">
+    <option *ngFor="let voice of voices" [value]="voice.value">{{voice.name}}</option>
+  </select>
+  <br/>
+  <input type="text" name="text4" ngModel="4">
+  <select name="voice4" ngModel="">
+    <option *ngFor="let voice of voices" [value]="voice.value">{{voice.name}}</option>
+  </select>
+  <br/><hr/>
+  <input type="submit" value="サブミット">
+</form>

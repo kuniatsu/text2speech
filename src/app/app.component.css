@@ -1,0 +1,11 @@
+form {
+  text-align: center;
+}
+
+input[type=text] {
+  height: 18px;
+}
+
+select {
+  height: 23px;
+}
