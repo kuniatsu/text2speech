@@ -7,6 +7,7 @@ const os = require('os');
 // 本番かどうか
 const build = true;
 
+// electronの自動再ロード
 if (!build) {
   require('electron-reload')(__dirname);
 }
@@ -40,7 +41,7 @@ function createWindow() {
   win.on('closed', () => {
     win = null;
   });
-});
+}
 
 // アプリの初期化が完了した
 app.on('ready', createWindow);
