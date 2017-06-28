@@ -2,9 +2,29 @@
 // https://azure.microsoft.com/en-us/services/cognitive-services/speech/
 // https://azure.microsoft.com/en-us/try/cognitive-services/my-apis/
 
+declare global { interface Window { require: Function; } }
 import request from 'request';
 import async from 'async';
 
+// ユーザーが決める場合、ダイアログが出て、自動に動作したら、ファイルDesktopに置く
+const USER_CHOOSE_DOWNLOAD_PATH = false;
+let downloadHandler;
+
+if (USER_CHOOSE_DOWNLOAD_PATH) {
+  downloadHandler = (filename, buffer) => {
+    const url = URL.createObjectURL(new Blob([buffer]));
+    let downloadLink = document.createElement("a");
+    downloadLink.download = filename;
+    downloadLink.href = url;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+    URL.revokeObjectURL(url);
+  };
+} else {
+  // メインプロセスからの関数をインポート
+  downloadHandler = window.require('electron').remote.require('./main').writeFileToDownloadDirectory;
+}
 // ログインしてから、https://azure.microsoft.com/en-us/try/cognitive-services/my-apis/　で登録できる
 const BingSpeechAPIKey = '6c942d415b884e99b1fcc20a43b7a873';
 
@@ -94,7 +114,13 @@ function textToSpeech(input) {
     }
 
     // オーディオバッファをMP3ファイルとしてダウンロード
-    downloadTextToSpeechFile(filename + '.mp3', new Blob([content]));
+    downloadHandler(filename + '.mp3', content, err => {
+      if (err) {
+        alert('エラーが発生しました！');
+      } else {
+        alert('ファイル作成が完了しました！');
+      }
+    });
   });
 }
 

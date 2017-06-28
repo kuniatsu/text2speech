@@ -10,10 +10,6 @@
       {
         "from": "./angular-dist",
         "to": "./angular-dist"
-      },
-      {
-        "from": "./.env",
-        "to": "./.env"
       }
     ]
   },
@@ -27,7 +23,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "electron": "electron .",
-    "dist": "electron-builder"
+    "dist": "npm run build && electron-builder"
   },
   "postinstall": "electron-builder install-app-deps",
   "private": true,
