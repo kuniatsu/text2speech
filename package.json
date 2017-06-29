@@ -18,7 +18,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --base-href /Users/kuniatus/src/electron-text-2-speech/angular-dist/",
+    "build": "ng build --base-href /Users/kuniatus/src/text2speech/angular-dist/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
